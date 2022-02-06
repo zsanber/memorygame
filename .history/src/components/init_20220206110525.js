@@ -26,6 +26,7 @@ export default function init(nr){
 
 //függvény létrehozása function-nel, mivel erőforrás igényes, ezért async
 // a függvényre utalok fent a for ciklusban do - whileval, ha nincs jó url, ne tegye be, fusson tovább
+
 async function checkImage(url){
     const response=await fetch(url)
     const blob=await response.blob()

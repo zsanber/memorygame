@@ -6,10 +6,9 @@ export default function init(nr){
     for(let i=0; i<nr*nr/2;i++){
         do {
         url=`https://picsum.photos/id/${Math.floor(Math.random()*200)}/300` 
-        }while(!checkImage(url))
+        }
         cards.push(url)
     }
-
     //tömb duplázása : 
     //megjegyzések {id:} kell a {} mert objektumra utal; ,[]) inicializálom a tömbbe, - mivel több sor a kód kell return: acc
     const cardsDupla=cards.reduce((acc,url)=>{
@@ -25,7 +24,6 @@ export default function init(nr){
 }
 
 //függvény létrehozása function-nel, mivel erőforrás igényes, ezért async
-// a függvényre utalok fent a for ciklusban do - whileval, ha nincs jó url, ne tegye be, fusson tovább
 async function checkImage(url){
     const response=await fetch(url)
     const blob=await response.blob()
