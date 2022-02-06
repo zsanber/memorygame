@@ -24,25 +24,6 @@ export default function init(nr){
     return cardsDupla
 }
 
-function checkImage(url) {
-    let flag=[]
-    let image = new Image();
-    image.onload = function() {
-        if (this.width > 0) 
-            flag.push(1) 
-            console.log('van kép')
-    }
-    image.onerror = function() {
-        flag.push(0) 
-        console.log("nincs kép")
-    }
-    //image.src = url;
-    if(flag[0]==0)
-        return false
-    else
-        return true
-}
-
 //függvény létrehozása function-nel, mivel erőforrás igényes, ezért async
 // a függvényre utalok fent a for ciklusban do - whileval, ha nincs jó url, ne tegye be, fusson tovább
 
@@ -52,3 +33,22 @@ function checkImage(url) {
     console.log(blob.type)
     return blob.type.startsWith('image/')
 }*/
+
+function checkImage(url) {
+    let flag=[]
+    let image = new Image();
+    image.onload = function() {
+        if (this.width > 0) 
+            flag.push(1)
+          
+    }
+    image.onerror = function() {
+        flag.push(0)
+        
+    }
+    //image.src = url;
+    if(flag[0]==0)
+        return false
+    else
+        return true
+}

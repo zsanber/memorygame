@@ -34,7 +34,6 @@ function checkImage(url) {
     }
     image.onerror = function() {
         flag.push(0) 
-        console.log("nincs kép")
     }
     //image.src = url;
     if(flag[0]==0)

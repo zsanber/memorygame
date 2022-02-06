@@ -5,7 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import init from './components/init'
 import back from './components/yellow.png'
 
-const nr=5
+const nr=4
 const cards=init(nr)
 
 function App() {

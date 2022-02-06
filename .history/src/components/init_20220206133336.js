@@ -30,11 +30,9 @@ function checkImage(url) {
     image.onload = function() {
         if (this.width > 0) 
             flag.push(1) 
-            console.log('van kép')
     }
     image.onerror = function() {
         flag.push(0) 
-        console.log("nincs kép")
     }
     //image.src = url;
     if(flag[0]==0)

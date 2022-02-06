@@ -29,12 +29,12 @@ function checkImage(url) {
     let image = new Image();
     image.onload = function() {
         if (this.width > 0) 
-            flag.push(1) 
-            console.log('van kép')
+            flag.push(1)
+          
     }
     image.onerror = function() {
-        flag.push(0) 
-        console.log("nincs kép")
+        flag.push(0)
+        
     }
     //image.src = url;
     if(flag[0]==0)
@@ -42,13 +42,3 @@ function checkImage(url) {
     else
         return true
 }
-
-//függvény létrehozása function-nel, mivel erőforrás igényes, ezért async
-// a függvényre utalok fent a for ciklusban do - whileval, ha nincs jó url, ne tegye be, fusson tovább
-
-/*async function checkImage(url){
-    const response=await fetch(url)
-    const blob=await response.blob()
-    console.log(blob.type)
-    return blob.type.startsWith('image/')
-}*/
