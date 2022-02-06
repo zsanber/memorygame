@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import init from './components/init'
-import back from './components/yellow.png'
+import init from './components/init';
+import backPicture from './components/yellow.png'
 
 const nr=6
 const cards=init(nr)
+
 
 function App() {
   console.log(cards)
@@ -15,21 +16,25 @@ function App() {
   const [disabled,setDisabled] =useState(false)// 2szer ugyanarra ne kattinthassunk
 
   const handleClick=(id)=>{
-    setDisabled(true)
-    if(flipped.length===0){
-      setFlipped([parseInt(id)])
-      setDisabled(false)
+    setDisabled(true)  //kétszer ne legyen kattintható ha
+    if(flipped.length===0){  //még nincs bent a flipped tömbben
+      setFlipped([parseInt(id)]) // beteszem a tömbbe
+      setDisabled(false)  //majd újra kattinthatóvá teszem
     }else{
-      if(flipped.includes(id))
+      if(flipped.includes(id))  //vizsgálom a flipped tömb tartalmazza e az idt, amin a kattintás történt
           return
-      setFlipped([...flipped,id])
-      if(isMatch(id)){
-        setSolved([...solved,flipped[0],id])
-        resetCards()
-      }else
-        setTimeout(resetCards,1000)
-    }
+            setFlipped([...flipped,id]) //ha nem tartalmazza, beteszi a flippedbe
+        if(isMatch(id)){
+          setSolved([...solved,flipped[0],id]) //ha tartalmazza, beteszi a solvedba
+          resetCards()
+        } else
+          setTimeout(resetCards,1000) // ha nem talál, akkor visszaforgatjuk a kártyát resetCard függvénnyel, lentebb
+     }
   }
+
+  
+  
+  //ha találat van, bekerül a flippedbe
 
   const isMatch=(id)=>{
     const clickedCard=cards.find(obj=>obj.id==id)
@@ -37,6 +42,7 @@ function App() {
     return clickedCard.url===flippedCard.url
   }
 
+  //ha nincs találat, kiürül a flipped 
   const resetCards=()=>{
     setFlipped([])
     setDisabled(false)

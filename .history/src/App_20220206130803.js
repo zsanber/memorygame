@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import init from './components/init'
-import back from './components/yellow.png'
+import init from './components/init';
+import backPicture from './components/yellow.png'
 
 const nr=6
 const cards=init(nr)
+
 
 function App() {
   console.log(cards)
@@ -15,28 +16,31 @@ function App() {
   const [disabled,setDisabled] =useState(false)// 2szer ugyanarra ne kattinthassunk
 
   const handleClick=(id)=>{
-    setDisabled(true)
-    if(flipped.length===0){
-      setFlipped([parseInt(id)])
-      setDisabled(false)
-    }else{
-      if(flipped.includes(id))
-          return
-      setFlipped([...flipped,id])
-      if(isMatch(id)){
-        setSolved([...solved,flipped[0],id])
-        resetCards()
-      }else
-        setTimeout(resetCards,1000)
+      setDisabled(true) 
+      if(flipped.length===0){ 
+        setFlipped([parseInt(id)]) 
+        setDisabled(false)
+      }else{
+        if(flipped.includes(id))
+            return
+        setFlipped([...flipped,id]) 
+        if(isMatch(id)){
+          setSolved([...solved,flipped[0],id])
+          resetCards()
+        }else
+          setTimeout(resetCards,1000) 
+      }
     }
-  }
 
+  
+  //ha találat van, bekerül a flippedbe
   const isMatch=(id)=>{
     const clickedCard=cards.find(obj=>obj.id==id)
     const flippedCard=cards.find(obj=>obj.id==flipped[0])
     return clickedCard.url===flippedCard.url
   }
 
+  //ha nincs találat, kiürül a flipped 
   const resetCards=()=>{
     setFlipped([])
     setDisabled(false)
@@ -49,7 +53,7 @@ function App() {
         {cards.map(obj=> 
           <div className={`col-${Math.floor(12/nr)} border border-info myCol `} key={obj.id} >
             <img className="img-fluid" 
-              src={flipped.includes(obj.id) || solved.includes(obj.id) ? obj.url : back} 
+              src={flipped.includes(obj.id) || solved.includes(obj.id) ? obj.url : backPicture} 
               disabled={disabled || solved.includes(obj.id)}
               onClick={()=>disabled ? null : handleClick(obj.id)}
               alt="random photo"/>
